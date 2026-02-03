@@ -136,7 +136,7 @@ button {
 <!-- GAME CARD -->
 <div class="card hidden" id="gameCard">
     <h1>One small game 😌</h1>
-    <p>Tap ❤️ 3 times</p>
+    <p>Tap ❤️ 4 times</p>
     <div id="hearts"></div>
 </div>
 
@@ -211,7 +211,7 @@ function heartClicked(heart) {
     heart.onclick = null;
     count++;
 
-    if (count === 3) {
+    if (count === 4) {
         document.getElementById("gameCard").classList.add("hidden");
         document.getElementById("finalPage").classList.remove("hidden");
     }
@@ -220,5 +220,6 @@ function heartClicked(heart) {
 
 </body>
 </html>
+
 
 
