@@ -112,6 +112,10 @@ button {
 </style>
 </head>
 
+<audio id="loveSong" loop>
+	<source src="Thangamey.mp3.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+</audio>
 <body>
 
 <!-- MAIN CARD -->
@@ -128,9 +132,7 @@ button {
     </div>
 </div>
 
-<audio autoplay loop>
-    <source src="Thangamey.mp3.mp3" type="audio/mpeg">
-</audio>
+
 
 
 <!-- GAME CARD -->
@@ -194,6 +196,11 @@ function startGame() {
     document.getElementById("mainCard").classList.add("hidden");
     document.getElementById("gameCard").classList.remove("hidden");
 
+	 const song = document.getElementById("loveSong");
+    if (song) {
+        song.play();
+		  }
+
     const heartsDiv = document.getElementById("hearts");
     heartsDiv.innerHTML = "";
 
@@ -220,6 +227,7 @@ function heartClicked(heart) {
 
 </body>
 </html>
+
 
 
 
