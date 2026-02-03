@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pattu ❤️ Thangam Kutty</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    max-width: 430px;
+    z-index: 2;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ff4d6d;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    border: none;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.yes {
+    background: #ff4d6d;
+    color: white;
+}
+
+.no {
+    background: #adb5bd;
+    color: white;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+.game-heart {
+    font-size: 35px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+/* FINAL PAGE */
+.final-page {
+    text-align: center;
+    color: white;
+    animation: fadeIn 2s ease;
+}
+
+.final-page h1 {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.final-page p {
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MAIN CARD -->
+<div class="card" id="mainCard">
+    <h1>Hey Thangam Kutty 💖</h1>
+
+    
+
+    <p>Will you be <b>Pattu’s Valentine</b>? 🌹</p>
+
+    <div class="buttons">
+        <button class="yes" onclick="startGame()">YES 💕</button>
+        <button class="no" id="noBtn">NO 🙈</button>
+    </div>
+</div>
+
+<audio autoplay loop>
+    <source src="C:\Users\ASUS\Desktop\valentine\Thangamey.mp3.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- GAME CARD -->
+<div class="card hidden" id="gameCard">
+    <h1>One small game 😌</h1>
+    <p>Tap ❤️ 3 times</p>
+    <div id="hearts"></div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="final-page hidden" id="finalPage">
+	<audio id="loveSong" loop>
+    <source src="C:\Users\ASUS\Desktop\valentine\Thangamey.mp3.mp3" type="audio/mpeg">
+</audio>
+
+	<img src="C:\Users\ASUS\Desktop\valentine\us.jpg.jpg" alt="Us"
+    style="
+    width:110px;
+    border-radius:20px;
+    box-shadow: 0 8px 20px rgba(255,77,109,0.4);
+    margin:15px 0;
+    ">
+    <h1>My Heart ❤️</h1>
+    <p>
+        From past 4 years till forever,<br>
+        it’s just you & me ❤️ ♾️<br><br>
+
+        I love you endlessly,<br>
+        <b>Thangam Kutty</b> 🥰<br><br>
+
+        — Yours always,<br>
+        <b>Pattu</b> 💞
+    </p>
+</div>
+
+<script>
+/* Floating hearts */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
+
+/* NO button runs away */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * 80 + "vw";
+    noBtn.style.top = Math.random() * 80 + "vh";
+});
+
+/* Game logic */
+let count = 0;
+
+function startGame() {
+    document.getElementById("mainCard").classList.add("hidden");
+    document.getElementById("gameCard").classList.remove("hidden");
+
+    const heartsDiv = document.getElementById("hearts");
+    heartsDiv.innerHTML = "";
+
+    for (let i = 0; i < 5; i++) {
+        const h = document.createElement("span");
+        h.className = "game-heart";
+        h.innerHTML = "❤️";
+        h.onclick = () => heartClicked(h);
+        heartsDiv.appendChild(h);
+    }
+}
+
+function heartClicked(heart) {
+    heart.innerHTML = "💖";
+    heart.onclick = null;
+    count++;
+
+    if (count === 3) {
+        document.getElementById("gameCard").classList.add("hidden");
+        document.getElementById("finalPage").classList.remove("hidden");
+    }
+}
+</script>
+
+</body>
+</html>
+
