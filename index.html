@@ -5,6 +5,47 @@
 <title>Pattu ❤️ Thangam Kutty</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+	
+/* Video background on final page */
+#finalPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#bgVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.6);
+}
+
+/* Text on top of video */
+.final-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.final-content h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.final-content p {
+    font-size: 22px;
+    line-height: 1.6;
+}
 
 <style>
 body {
@@ -232,6 +273,7 @@ function heartClicked(heart) {
 
 </body>
 </html>
+
 
 
 
