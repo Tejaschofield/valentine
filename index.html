@@ -8,6 +8,16 @@
 	
 
 <style>
+	.type-cursor::after {
+    content: "|";
+    margin-left: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
 body {
     margin: 0;
     height: 100vh;
@@ -113,7 +123,10 @@ button {
     inset: 0;
     background: black;
     z-index: 10;
+    overflow-y: auto;           /* ✅ KEY FIX */
+    -webkit-overflow-scrolling: touch;
 }
+
 
 #bgVideo {
     position: absolute;
@@ -154,10 +167,17 @@ button {
 .final-content {
     position: relative;
     z-index: 2;
+    min-height: 100vh;          /* ✅ NOT fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     color: white;
-    padding: 30px;
+    padding: 40px 20px 60px;    /* ✅ EXTRA bottom padding */
+    box-sizing: border-box;
 }
+
 
 .final-content h1 {
     font-size: 42px;
@@ -165,8 +185,8 @@ button {
 }
 
 .final-content p {
-    font-size: 22px;
-    line-height: 1.6;
+    font-size: clamp(16px, 4vw, 22px);
+    line-height: 1.45;          /* slightly tighter */
 }
 
 
@@ -211,6 +231,13 @@ button {
 
 <!-- FINAL PAGE -->
 <div class="final-page hidden" id="finalPage">
+	<!-- Text on top -->
+    <div class="final-content">
+        <h1 id="typeTitle"></h1>
+        <p id="typeText"></p>
+        <p id="typeSignature" style="margin-top:25px; font-weight:600;"></p>
+    </div>
+
 	<audio id="loveSong" loop>
     <source src="Thangamey.mp3.mp3" type="audio/mpeg">
 </audio>
@@ -226,6 +253,7 @@ button {
     box-shadow: 0 8px 20px rgba(255,77,109,0.4);
     margin:15px 0;
     ">
+	
     <h1>Heyyy Baccha❤️</h1>
     <p>
         From past 4 years till forever,<br>
@@ -241,6 +269,54 @@ button {
 </div>
 
 <script>
+	/* ===== TYPEWRITER EFFECT (FINAL PAGE ONLY) ===== */
+
+const titleText = "Heyyy Baccha ❤️";
+
+const mainText =
+`From past 4 years till forever,
+from you & me to us ❤️ ♾️
+from highschool till grey hair
+
+I love you endlessly,
+Thangam Kutty 🥰`;
+
+const signatureText =
+"— Yours always,\nPattu 💞";
+
+function typeWriter(element, text, speed, callback) {
+    let i = 0;
+    element.classList.add("type-cursor");
+
+    const interval = setInterval(() => {
+        element.innerHTML += text.charAt(i);
+        i++;
+
+        if (i === text.length) {
+            clearInterval(interval);
+            element.classList.remove("type-cursor");
+            if (callback) callback();
+        }
+    }, speed);
+}
+
+/* Call this when final page opens */
+function startTypewriter() {
+    const titleEl = document.getElementById("typeTitle");
+    const textEl = document.getElementById("typeText");
+    const signEl = document.getElementById("typeSignature");
+
+    titleEl.innerHTML = "";
+    textEl.innerHTML = "";
+    signEl.innerHTML = "";
+
+    typeWriter(titleEl, titleText, 90, () => {
+        typeWriter(textEl, mainText, 40, () => {
+            typeWriter(signEl, signatureText, 70);
+        });
+    });
+}
+
 /* Floating hearts */
 setInterval(() => {
     const heart = document.createElement("div");
@@ -293,12 +369,14 @@ function heartClicked(heart) {
     if (count === 5) {
         document.getElementById("gameCard").classList.add("hidden");
         document.getElementById("finalPage").classList.remove("hidden");
+		startTypewriter();
     }
 }
 </script>
 
 </body>
 </html>
+
 
 
 
