@@ -261,6 +261,75 @@ button {
 
 /* Bottom point */
 .star[data-index="6"] { top: 65%; left: 50%; }
+	/* ===== MEMORY CARD OVERLAY ===== */
+
+#memoryCard {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+/* Card container */
+.card-inner {
+    background: #ffffff;
+    width: 320px;
+    max-width: 85%;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    animation: fadeInUp 0.5s ease;
+}
+
+/* Date */
+.memory-date {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+/* Photo */
+.memory-photo {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+/* Caption */
+.memory-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 18px;
+}
+
+/* Button */
+.memory-btn {
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 22px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Entry animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 	
 </style>
@@ -347,6 +416,26 @@ button {
     <div class="star locked" data-index="6"></div>
 
 </div>
+	<!-- MEMORY CARD (CENTER) -->
+<div id="memoryCard">
+
+    <div class="card-inner">
+        <div class="memory-date">June 2019</div>
+
+        <img src="us.jpg" alt="Memory photo" class="memory-photo">
+
+        <div class="memory-text">
+            We didn’t know it then,<br>
+            but this was the beginning.
+        </div>
+
+        <button class="memory-btn">
+            Continue →
+        </button>
+    </div>
+
+</div>
+
 
 
 <script>
@@ -457,6 +546,7 @@ function heartClicked(heart) {
 
 </body>
 </html>
+
 
 
 
