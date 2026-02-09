@@ -7,15 +7,65 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
-    background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+.type-cursor::after {
+    content: "|";
+    margin-left: 5px;
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    0%,50%{opacity:1;}51%,100%{opacity:0;}
 }
 
-/* ---------- COMMON ---------- */
-.hidden { display: none; }
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+}
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    max-width: 430px;
+    z-index: 2;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ff4d6d;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
 button {
     border: none;
@@ -25,67 +75,24 @@ button {
     cursor: pointer;
 }
 
-/* ---------- SCENE 1 : QUESTION ---------- */
-.card {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-inner {
-    background: white;
-    padding: 35px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    max-width: 420px;
-}
-
-h1 {
-    font-family: 'Pacifico', cursive;
-    color: #ff4d6d;
-}
-
-.buttons {
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
 .yes { background: #ff4d6d; color: white; }
 .no  { background: #adb5bd; color: white; position: relative; }
 
-/* ---------- SCENE 2 : HEART GAME ---------- */
-#game {
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, #ff4d6d, #ff8fab);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.game-inner {
-    background: white;
-    padding: 30px;
-    border-radius: 25px;
-    text-align: center;
-}
+.hidden { display: none; }
 
 .game-heart {
-    font-size: 40px;
-    margin: 10px;
+    font-size: 35px;
     cursor: pointer;
+    margin: 10px;
 }
 
-/* ---------- SCENE 3 : FINAL ---------- */
-#final {
+/* FINAL PAGE */
+#finalPage {
     position: fixed;
     inset: 0;
     background: black;
+    z-index: 10;
+    overflow-y: auto;
 }
 
 #bgVideo {
@@ -101,14 +108,13 @@ h1 {
     position: relative;
     z-index: 2;
     min-height: 100vh;
-    padding: 40px 20px 60px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
+    padding: 40px 20px 60px;
 }
 
 .final-content h1 {
@@ -121,18 +127,6 @@ h1 {
     line-height: 1.45;
     white-space: pre-line;
 }
-
-/* Typewriter cursor */
-.type-cursor::after {
-    content: "|";
-    margin-left: 5px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%,50% { opacity: 1; }
-    51%,100% { opacity: 0; }
-}
 </style>
 </head>
 
@@ -143,30 +137,25 @@ h1 {
     <source src="Thangamey.mp3.mp3" type="audio/mpeg">
 </audio>
 
-<!-- SCENE 1 -->
-<div class="card" id="scene1">
-    <div class="card-inner">
-        <h1>Hey Thangam Kutty 💖</h1>
-        <p>Will you be <b>Pattu’s Valentine</b>? 🌹</p>
-        <div class="buttons">
-            <button class="yes" onclick="startGame()">YES 💕</button>
-            <button class="no" id="noBtn">NO 🙈</button>
-        </div>
+<!-- MAIN CARD -->
+<div class="card" id="mainCard">
+    <h1>Hey Thangam Kutty 💖</h1>
+    <p>Will you be <b>Pattu’s Valentine</b>? 🌹</p>
+    <div class="buttons">
+        <button class="yes" onclick="startGame()">YES 💕</button>
+        <button class="no" id="noBtn">NO 🙈</button>
     </div>
 </div>
 
-<!-- SCENE 2 -->
-<div id="game" style="display:none;">
-    <div class="game-inner">
-        <h2>How much do you love me? 💖</h2>
-        <p>Tap on hearts</p>
-        <div id="hearts"></div>
-    </div>
+<!-- GAME CARD -->
+<div class="card hidden" id="gameCard">
+    <h1>Quick Question 😌</h1>
+    <p>How much do you love me? Click on hearts 💖</p>
+    <div id="hearts"></div>
 </div>
 
-<!-- SCENE 3 -->
- <div id="final" style="display:none;">
-
+<!-- FINAL PAGE -->
+<div class="hidden" id="finalPage">
     <video muted loop playsinline id="bgVideo" preload="none">
         <source src="Firefly The couple dancing and enjoying each other company. The video is shot from a steady, frontal.mp4" type="video/mp4">
     </video>
@@ -178,17 +167,21 @@ h1 {
     </div>
 </div>
 
-<script>
-    #final.hidden {
-    display: none !important;
-}
+<!-- CONSTELLATION (DISABLED FOR NOW) -->
+<div id="constellation" class="hidden"></div>
+<div id="memoryCard" class="hidden"></div>
 
-    // FORCE INITIAL STATE (prevents auto scene jump)
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("scene1").classList.remove("hidden");
-    document.getElementById("game").classList.add("hidden");
-    document.getElementById("final").classList.add("hidden");
-});
+<script>
+/* Floating hearts */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
 
 /* NO button runs */
 const noBtn = document.getElementById("noBtn");
@@ -198,13 +191,15 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.top  = Math.random() * 80 + "vh";
 });
 
-/* Start game */
+/* Game */
 let count = 0;
 
 function startGame() {
-   document.getElementById("scene1").style.display = "none";
-    document.getElementById("game").style.display = "none";
-    document.getElementById("loveSong").play();
+    document.getElementById("mainCard").classList.add("hidden");
+    document.getElementById("gameCard").classList.remove("hidden");
+
+    const song = document.getElementById("loveSong");
+    if (song) song.play();
 
     const heartsDiv = document.getElementById("hearts");
     heartsDiv.innerHTML = "";
@@ -214,30 +209,23 @@ function startGame() {
         const h = document.createElement("span");
         h.className = "game-heart";
         h.innerHTML = "❤️";
-        h.onclick = () => clickHeart(h);
+        h.onclick = () => heartClicked(h);
         heartsDiv.appendChild(h);
     }
 }
-function clickHeart(heart) {
+
+function heartClicked(heart) {
     heart.innerHTML = "💖";
     heart.onclick = null;
     count++;
 
     if (count === 5) {
-        // Hide game scene
-        document.getElementById("game").style.display = "none";
+        document.getElementById("gameCard").classList.add("hidden");
+        document.getElementById("finalPage").classList.remove("hidden");
 
-        // Show final scene
-        const finalPage = document.getElementById("final");
-        finalPage.style.display = "block";
-
-        // ▶️ START VIDEO HERE (THIS IS THE CORRECT PLACE)
         const video = document.getElementById("bgVideo");
-        if (video) {
-            video.play();
-        }
+        if (video) video.play();
 
-        // Start typewriter text
         startTypewriter();
     }
 }
@@ -281,6 +269,8 @@ Thangam Kutty 🥰`, 40, () => {
 
 </body>
 </html>
+
+
 
 
 
