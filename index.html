@@ -5,70 +5,17 @@
 <title>Pattu ❤️ Thangam Kutty</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
-	
 
 <style>
-	.type-cursor::after {
-    content: "|";
-    margin-left: 5px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-}
 body {
     margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff4d6d, #ff8fab);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
+    background: linear-gradient(135deg, #ff4d6d, #ff8fab);
 }
 
-/* Floating hearts */
-.heart {
-    position: absolute;
-    font-size: 20px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.8;
-}
-
-@keyframes floatUp {
-    0% { transform: translateY(100vh); opacity: 0; }
-    20% { opacity: 1; }
-    100% { transform: translateY(-10vh); opacity: 0; }
-}
-
-.card {
-    background: white;
-    padding: 35px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    max-width: 430px;
-    z-index: 2;
-}
-
-h1 {
-    font-family: 'Pacifico', cursive;
-    color: #ff4d6d;
-    margin-bottom: 10px;
-}
-
-p {
-    font-size: 15px;
-    margin-bottom: 20px;
-}
-
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
+/* ---------- COMMON ---------- */
+.hidden { display: none; }
 
 button {
     border: none;
@@ -78,55 +25,68 @@ button {
     cursor: pointer;
 }
 
-.yes {
-    background: #ff4d6d;
-    color: white;
+/* ---------- SCENE 1 : QUESTION ---------- */
+.card {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.no {
-    background: #adb5bd;
-    color: white;
-    position: relative;
+.card-inner {
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    max-width: 420px;
 }
 
-.hidden {
-    display: none;
+h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ff4d6d;
+}
+
+.buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.yes { background: #ff4d6d; color: white; }
+.no  { background: #adb5bd; color: white; position: relative; }
+
+/* ---------- SCENE 2 : HEART GAME ---------- */
+#game {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-inner {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
 }
 
 .game-heart {
-    font-size: 35px;
-    cursor: pointer;
+    font-size: 40px;
     margin: 10px;
+    cursor: pointer;
 }
 
-/* FINAL PAGE */
-.final-page {
-    text-align: center;
-    color: white;
-    animation: fadeIn 2s ease;
-}
-
-.final-page h1 {
-    font-size: 38px;
-    margin-bottom: 20px;
-}
-
-.final-page p {
-    font-size: 20px;
-    line-height: 1.6;
-}
-	/* Video background on final page */
-/* ===== FINAL PAGE VIDEO BACKGROUND ===== */
-
-#finalPage {
+/* ---------- SCENE 3 : FINAL ---------- */
+#final {
     position: fixed;
     inset: 0;
     background: black;
-    z-index: 10;
-    overflow-y: auto;           /* ✅ KEY FIX */
-    -webkit-overflow-scrolling: touch;
 }
-
 
 #bgVideo {
     position: absolute;
@@ -140,412 +100,167 @@ button {
 .final-content {
     position: relative;
     z-index: 2;
-    max-height: 100vh;
+    min-height: 100vh;
+    padding: 40px 20px 60px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
-    padding: 30px 20px;
-    box-sizing: border-box;
 }
-
 
 .final-content h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
-}
-
-.final-content p {
-    font-size: 22px;
-    line-height: 1.6;
-}
-
-
-/* Text on top of video */
-.final-content {
-    position: relative;
-    z-index: 2;
-    min-height: 100vh;          /* ✅ NOT fixed height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    padding: 40px 20px 60px;    /* ✅ EXTRA bottom padding */
-    box-sizing: border-box;
-}
-
-
-.final-content h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
+    font-size: clamp(28px, 6vw, 42px);
+    margin-bottom: 15px;
 }
 
 .final-content p {
     font-size: clamp(16px, 4vw, 22px);
-    line-height: 1.45;          /* slightly tighter */
+    line-height: 1.45;
+    white-space: pre-line;
 }
 
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-	/* ===== CONSTELLATION SKY ===== */
-
-#constellation {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at top, #0b132b, #000814);
-    overflow: hidden;
-    z-index: 5;
+/* Typewriter cursor */
+.type-cursor::after {
+    content: "|";
+    margin-left: 5px;
+    animation: blink 1s infinite;
 }
 
-/* STAR BASE */
-.star {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: #ffffff;
-    opacity: 0.4;
-    transition: all 0.4s ease;
+@keyframes blink {
+    0%,50% { opacity: 1; }
+    51%,100% { opacity: 0; }
 }
-
-/* LOCKED STAR */
-.star.locked {
-    opacity: 0.25;
-}
-
-/* ACTIVE STAR */
-.star.active {
-    opacity: 1;
-    box-shadow: 0 0 15px 6px rgba(255, 255, 255, 0.9);
-    animation: pulse 2s infinite;
-}
-
-/* COMPLETED STAR (for later) */
-.star.completed {
-    opacity: 1;
-    box-shadow: 0 0 12px 4px rgba(255, 215, 150, 0.8);
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.4); }
-    100% { transform: scale(1); }
-}
-
-/* ===== HEART SHAPE POSITIONING ===== */
-
-/* Top left */
-.star[data-index="0"] { top: 35%; left: 45%; }
-
-/* Top right */
-.star[data-index="1"] { top: 35%; left: 55%; }
-
-/* Upper left curve */
-.star[data-index="2"] { top: 42%; left: 38%; }
-
-/* Upper right curve */
-.star[data-index="3"] { top: 42%; left: 62%; }
-
-/* Lower left */
-.star[data-index="4"] { top: 55%; left: 43%; }
-
-/* Lower right */
-.star[data-index="5"] { top: 55%; left: 57%; }
-
-/* Bottom point */
-.star[data-index="6"] { top: 65%; left: 50%; }
-	/* ===== MEMORY CARD OVERLAY ===== */
-
-#memoryCard {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 20;
-}
-
-/* Card container */
-.card-inner {
-    background: #ffffff;
-    width: 320px;
-    max-width: 85%;
-    border-radius: 18px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    animation: fadeInUp 0.5s ease;
-}
-
-/* Date */
-.memory-date {
-    font-size: 13px;
-    color: #777;
-    margin-bottom: 10px;
-}
-
-/* Photo */
-.memory-photo {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 14px;
-}
-
-/* Caption */
-.memory-text {
-    font-size: 15px;
-    line-height: 1.5;
-    color: #333;
-    margin-bottom: 18px;
-}
-
-/* Button */
-.memory-btn {
-    border: none;
-    background: #ff4d6d;
-    color: white;
-    padding: 10px 22px;
-    border-radius: 22px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-/* Entry animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-	
 </style>
 </head>
-	
 
-<audio id="loveSong" loop>
-	<source src="Thangamey.mp3.mp3" type="audio/mpeg">
-    Your browser does not support audio.
-</audio>
 <body>
 
-<!-- MAIN CARD -->
-<div class="card" id="mainCard">
-    <h1>Hey Thangam Kutty 💖</h1>
+<!-- AUDIO -->
+<audio id="loveSong" loop>
+    <source src="Thangamey.mp3.mp3" type="audio/mpeg">
+</audio>
 
-    
-
-    <p>Will you be <b>Pattu’s Valentine</b>? 🌹</p>
-
-    <div class="buttons">
-        <button class="yes" onclick="startGame()">YES 💕</button>
-        <button class="no" id="noBtn">NO 🙈</button>
+<!-- SCENE 1 -->
+<div class="card" id="scene1">
+    <div class="card-inner">
+        <h1>Hey Thangam Kutty 💖</h1>
+        <p>Will you be <b>Pattu’s Valentine</b>? 🌹</p>
+        <div class="buttons">
+            <button class="yes" onclick="startGame()">YES 💕</button>
+            <button class="no" id="noBtn">NO 🙈</button>
+        </div>
     </div>
 </div>
 
-
-
-
-<!-- GAME CARD -->
-<div class="card hidden" id="gameCard">
-    <h1>Quick Question 😌</h1>
-    <p> how much do you love me, click on hearts💖</p>
-    <div id="hearts"></div>
+<!-- SCENE 2 -->
+<div id="game" class="hidden">
+    <div class="game-inner">
+        <h2>How much do you love me? 💖</h2>
+        <p>Tap 5 hearts</p>
+        <div id="hearts"></div>
+    </div>
 </div>
 
-<!-- FINAL PAGE -->
-<div class="final-page hidden" id="finalPage">
-	<!-- Text on top -->
+<!-- SCENE 3 -->
+<div id="final" class="hidden">
+    <video autoplay muted loop playsinline id="bgVideo">
+        <source src="Firefly The couple dancing and enjoying each other company. The video is shot from a steady, frontal.mp4" type="video/mp4">
+    </video>
+
     <div class="final-content">
         <h1 id="typeTitle"></h1>
         <p id="typeText"></p>
-        <p id="typeSignature" style="margin-top:25px; font-weight:600;"></p>
+        <p id="typeSignature"></p>
     </div>
-
-	<audio id="loveSong" loop>
-    <source src="Thangamey.mp3.mp3" type="audio/mpeg">
-</audio>
-	<video autoplay muted loop playsinline id="bgVideo">
-        <source src="Firefly The couple dancing and enjoying each other company. The video is shot from a steady, frontal.mp4" type="video/mp4">
-        Your browser does not support video.
-    </video>
-
-	<img src="us.jpg" alt="Us"
-    style="
-    width:110px;
-    border-radius:20px;
-    box-shadow: 0 8px 20px rgba(255,77,109,0.4);
-    margin:15px 0;
-    ">
-	
-    <h1>Heyyy Baccha❤️</h1>
-    <p>
-        From past 4 years till forever,<br>
-        from you & me to us ❤️ ♾️<br>
-		from highschool till grey hair<br><br>
-
-        I love you endlessly,<br>
-        <b>Thangam Kutty</b> 🥰<br><br>
-
-        — Yours always,<br>
-        <b>Pattu</b> 💞
-    </p>
 </div>
-	<!-- CONSTELLATION SECTION -->
-<div id="constellation">
-
-    <div class="star active" data-index="0"></div>
-    <div class="star locked" data-index="1"></div>
-    <div class="star locked" data-index="2"></div>
-    <div class="star locked" data-index="3"></div>
-    <div class="star locked" data-index="4"></div>
-    <div class="star locked" data-index="5"></div>
-    <div class="star locked" data-index="6"></div>
-
-</div>
-	<!-- MEMORY CARD (CENTER) -->
-<div id="memoryCard">
-
-    <div class="card-inner">
-        <div class="memory-date">June 2019</div>
-
-        <img src="us.jpg" alt="Memory photo" class="memory-photo">
-
-        <div class="memory-text">
-            We didn’t know it then,<br>
-            but this was the beginning.
-        </div>
-
-        <button class="memory-btn">
-            Continue →
-        </button>
-    </div>
-
-</div>
-
-
 
 <script>
-	/* ===== TYPEWRITER EFFECT (FINAL PAGE ONLY) ===== */
-
-const titleText = "Heyyy Baccha ❤️";
-
-const mainText =
-`From past 4 years till forever,
-from you & me to us ❤️ ♾️
-from highschool till grey hair,
-
-I love you endlessly,
-Thangam Kutty 🥰`;
-
-const signatureText =
-"— Yours always,\nPattu 💞";
-
-function typeWriter(element, text, speed, callback) {
-    let i = 0;
-    element.classList.add("type-cursor");
-
-    const interval = setInterval(() => {
-        element.innerHTML += text.charAt(i);
-        i++;
-
-        if (i === text.length) {
-            clearInterval(interval);
-            element.classList.remove("type-cursor");
-            if (callback) callback();
-        }
-    }, speed);
-}
-
-/* Call this when final page opens */
-function startTypewriter() {
-    const titleEl = document.getElementById("typeTitle");
-    const textEl = document.getElementById("typeText");
-    const signEl = document.getElementById("typeSignature");
-
-    titleEl.innerHTML = "";
-    textEl.innerHTML = "";
-    signEl.innerHTML = "";
-
-    typeWriter(titleEl, titleText, 90, () => {
-        typeWriter(textEl, mainText, 40, () => {
-            typeWriter(signEl, signatureText, 70);
-        });
-    });
-}
-
-/* Floating hearts */
-setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (15 + Math.random() * 20) + "px";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 6000);
-}, 400);
-
-/* NO button runs away */
+/* NO button runs */
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", () => {
     noBtn.style.position = "absolute";
     noBtn.style.left = Math.random() * 80 + "vw";
-    noBtn.style.top = Math.random() * 80 + "vh";
+    noBtn.style.top  = Math.random() * 80 + "vh";
 });
 
-/* Game logic */
+/* Start game */
 let count = 0;
 
 function startGame() {
-    document.getElementById("mainCard").classList.add("hidden");
-    document.getElementById("gameCard").classList.remove("hidden");
+    document.getElementById("scene1").classList.add("hidden");
+    document.getElementById("game").classList.remove("hidden");
 
-	 const song = document.getElementById("loveSong");
-    if (song) {
-        song.play();
-		  }
+    document.getElementById("loveSong").play();
 
     const heartsDiv = document.getElementById("hearts");
     heartsDiv.innerHTML = "";
+    count = 0;
 
     for (let i = 0; i < 5; i++) {
         const h = document.createElement("span");
         h.className = "game-heart";
         h.innerHTML = "❤️";
-        h.onclick = () => heartClicked(h);
+        h.onclick = () => clickHeart(h);
         heartsDiv.appendChild(h);
     }
 }
 
-function heartClicked(heart) {
+function clickHeart(heart) {
     heart.innerHTML = "💖";
     heart.onclick = null;
     count++;
 
     if (count === 5) {
-        document.getElementById("gameCard").classList.add("hidden");
-        document.getElementById("finalPage").classList.remove("hidden");
-		startTypewriter();
+        document.getElementById("game").classList.add("hidden");
+        document.getElementById("final").classList.remove("hidden");
+        startTypewriter();
     }
+}
+
+/* Typewriter */
+function typeWriter(el, text, speed, cb) {
+    let i = 0;
+    el.classList.add("type-cursor");
+    const t = setInterval(() => {
+        el.innerHTML += text.charAt(i++);
+        if (i >= text.length) {
+            clearInterval(t);
+            el.classList.remove("type-cursor");
+            if (cb) cb();
+        }
+    }, speed);
+}
+
+function startTypewriter() {
+    const title = document.getElementById("typeTitle");
+    const text  = document.getElementById("typeText");
+    const sign  = document.getElementById("typeSignature");
+
+    title.innerHTML = "";
+    text.innerHTML  = "";
+    sign.innerHTML  = "";
+
+    typeWriter(title, "Heyyy Baccha ❤️", 90, () => {
+        typeWriter(text,
+`From past 4 years till forever,
+from you & me to us ❤️ ♾️
+from highschool till grey hair
+
+I love you endlessly,
+Thangam Kutty 🥰`, 40, () => {
+            typeWriter(sign, "— Yours always,\nPattu 💞", 70);
+        });
+    });
 }
 </script>
 
 </body>
 </html>
+
+
 
 
 
