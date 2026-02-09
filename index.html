@@ -166,7 +166,7 @@ h1 {
 
 <!-- SCENE 3 -->
 <div id="final" class="hidden">
-    <video autoplay muted loop playsinline id="bgVideo">
+    <video autoplay muted loop playsinline id="bgVideo" preload="none">
         <source src="Firefly The couple dancing and enjoying each other company. The video is shot from a steady, frontal.mp4" type="video/mp4">
     </video>
 
@@ -178,6 +178,17 @@ h1 {
 </div>
 
 <script>
+    #final.hidden {
+    display: none !important;
+}
+
+    // FORCE INITIAL STATE (prevents auto scene jump)
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("scene1").classList.remove("hidden");
+    document.getElementById("game").classList.add("hidden");
+    document.getElementById("final").classList.add("hidden");
+});
+
 /* NO button runs */
 const noBtn = document.getElementById("noBtn");
 noBtn.addEventListener("mouseover", () => {
@@ -259,6 +270,7 @@ Thangam Kutty 🥰`, 40, () => {
 
 </body>
 </html>
+
 
 
 
