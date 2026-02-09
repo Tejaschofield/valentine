@@ -156,7 +156,7 @@ h1 {
 </div>
 
 <!-- SCENE 2 -->
-<div id="game" class="hidden">
+<div id="game" style="display:none;">
     <div class="game-inner">
         <h2>How much do you love me? 💖</h2>
         <p>Tap on hearts</p>
@@ -165,8 +165,9 @@ h1 {
 </div>
 
 <!-- SCENE 3 -->
-<div id="final" class="hidden">
-    <video autoplay muted loop playsinline id="bgVideo" preload="none">
+ <div id="final" style="display:none;">
+
+    <video muted loop playsinline id="bgVideo" preload="none">
         <source src="Firefly The couple dancing and enjoying each other company. The video is shot from a steady, frontal.mp4" type="video/mp4">
     </video>
 
@@ -201,9 +202,8 @@ noBtn.addEventListener("mouseover", () => {
 let count = 0;
 
 function startGame() {
-    document.getElementById("scene1").classList.add("hidden");
-    document.getElementById("game").classList.remove("hidden");
-
+   document.getElementById("scene1").style.display = "none";
+    document.getElementById("game").style.display = "none";
     document.getElementById("loveSong").play();
 
     const heartsDiv = document.getElementById("hearts");
@@ -218,15 +218,26 @@ function startGame() {
         heartsDiv.appendChild(h);
     }
 }
-
 function clickHeart(heart) {
     heart.innerHTML = "💖";
     heart.onclick = null;
     count++;
 
     if (count === 5) {
-        document.getElementById("game").classList.add("hidden");
-        document.getElementById("final").classList.remove("hidden");
+        // Hide game scene
+        document.getElementById("game").style.display = "none";
+
+        // Show final scene
+        const finalPage = document.getElementById("final");
+        finalPage.style.display = "block";
+
+        // ▶️ START VIDEO HERE (THIS IS THE CORRECT PLACE)
+        const video = document.getElementById("bgVideo");
+        if (video) {
+            video.play();
+        }
+
+        // Start typewriter text
         startTypewriter();
     }
 }
@@ -270,6 +281,7 @@ Thangam Kutty 🥰`, 40, () => {
 
 </body>
 </html>
+
 
 
 
