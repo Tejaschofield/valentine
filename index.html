@@ -194,6 +194,74 @@ button {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
+	/* ===== CONSTELLATION SKY ===== */
+
+#constellation {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #0b132b, #000814);
+    overflow: hidden;
+    z-index: 5;
+}
+
+/* STAR BASE */
+.star {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ffffff;
+    opacity: 0.4;
+    transition: all 0.4s ease;
+}
+
+/* LOCKED STAR */
+.star.locked {
+    opacity: 0.25;
+}
+
+/* ACTIVE STAR */
+.star.active {
+    opacity: 1;
+    box-shadow: 0 0 15px 6px rgba(255, 255, 255, 0.9);
+    animation: pulse 2s infinite;
+}
+
+/* COMPLETED STAR (for later) */
+.star.completed {
+    opacity: 1;
+    box-shadow: 0 0 12px 4px rgba(255, 215, 150, 0.8);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+/* ===== HEART SHAPE POSITIONING ===== */
+
+/* Top left */
+.star[data-index="0"] { top: 35%; left: 45%; }
+
+/* Top right */
+.star[data-index="1"] { top: 35%; left: 55%; }
+
+/* Upper left curve */
+.star[data-index="2"] { top: 42%; left: 38%; }
+
+/* Upper right curve */
+.star[data-index="3"] { top: 42%; left: 62%; }
+
+/* Lower left */
+.star[data-index="4"] { top: 55%; left: 43%; }
+
+/* Lower right */
+.star[data-index="5"] { top: 55%; left: 57%; }
+
+/* Bottom point */
+.star[data-index="6"] { top: 65%; left: 50%; }
+
 	
 </style>
 </head>
@@ -267,6 +335,19 @@ button {
         <b>Pattu</b> 💞
     </p>
 </div>
+	<!-- CONSTELLATION SECTION -->
+<div id="constellation">
+
+    <div class="star active" data-index="0"></div>
+    <div class="star locked" data-index="1"></div>
+    <div class="star locked" data-index="2"></div>
+    <div class="star locked" data-index="3"></div>
+    <div class="star locked" data-index="4"></div>
+    <div class="star locked" data-index="5"></div>
+    <div class="star locked" data-index="6"></div>
+
+</div>
+
 
 <script>
 	/* ===== TYPEWRITER EFFECT (FINAL PAGE ONLY) ===== */
@@ -376,6 +457,7 @@ function heartClicked(heart) {
 
 </body>
 </html>
+
 
 
 
